@@ -54,14 +54,21 @@ def downfunc(main_list):
 
 
 def rightfunc(main_list):
-    pass
-
+    for j in range(4):
+        for i in range (2, -1, -1):
+            for k in range(i+1, 4):
+                if main_list[j][k]== 0 or main_list[j][k-1]== main_list[j][k]:
+                    main_list[j][k] +=main_list [j][k-1]
+                    main_list[j][k-1]= 0
+for i in main_list:
+    print(i)
+                
 def leftfunc(main_list):
     for j in range(4):
         for i in range(1 , 4):
         #main_list[j][i]
             for k in range(i-1 ,-1, -1):
-                if main_list[j][i] ==0 or main_list[j][k+1] == main_list [j][k]:
+                if main_list[j][k] ==0 or main_list[j][k+1] == main_list [j][k]:
                     main_list[j][k] += main_list[j][k+1]
                     main_list[j][k+1] =0 
     for i in main_list:
