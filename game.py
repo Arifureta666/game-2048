@@ -38,44 +38,64 @@ def start():
     return startlist
 
 def upfunc(main_list):
+    ban_list=[]
     for i in range(4):
         for j in range(1 ,4):
             if main_list[j][i] != 0:
                 for k in range(j-1, -1 , -1):
-                    if main_list [k][i] == 0 or main_list [k][i] ==main_list[k+1][i]:
+                    if main_list [k][i] == 0:
                         main_list[k][i]+= main_list[k+1][i]
                         main_list[k+1][i]= 0 
-
+                    elif main_list[k][i]==main_list[k+1][i] and [k,i] not in ban_list and [k+1,i] not in ban_list:
+                        main_list[k][i]+= main_list[k+1][i]
+                        main_list[k+1][i]= 0 
+                        ban_list.append([k,i])
+                        
         
 def downfunc(main_list):
+    ban_list=list()
     for i in range(4):
          for j in range(2 ,-1 ,-1):
             if main_list [j][i]:
                 for k in range(j+1 ,4):
-                    if main_list [k][i] == 0 or main_list[k][i] ==main_list [k-1][i]:
+                    if main_list [k][i] == 0:
                          main_list[k][i] += main_list [k-1][i]
                          main_list[k-1][i] =0
-
+                    elif main_list[k][i]==main_list[k-1][i] and [k,i] not in ban_list and [k-1,i] not in ban_list:
+                        main_list[k][i] += main_list [k-1][i]
+                        main_list[k-1][i] =0
+                        ban_list.append([k,i])
+                        
 
 def rightfunc(main_list):
+    ban_list = list()
     for j in range(4):
         for i in range (2, -1, -1):
             for k in range(i+1, 4):
-                if main_list[j][k]== 0 or main_list[j][k-1]== main_list[j][k]:
+                if main_list[j][k]== 0:
                     main_list[j][k] +=main_list [j][k-1]
                     main_list[j][k-1]= 0
+                elif main_list[j][k]==main_list[j][k-1] and [j,k] not in ban_list and [j,k-1] not in ban_list:
+                    main_list[j][k] +=main_list [j][k-1]
+                    main_list[j][k-1]= 0
+                    ban_list.append([j,k])
+                    
 
                 
 def leftfunc(main_list):
+    ban_list=list()
     for j in range(4):
         for i in range(1 , 4):
         #main_list[j][i]
             for k in range(i-1 ,-1, -1):
-                if main_list[j][k] ==0 or main_list[j][k+1] == main_list [j][k]:
+                if main_list[j][k] ==0:
                     main_list[j][k] += main_list[j][k+1]
                     main_list[j][k+1] =0 
-
-
+                elif main_list[j][k]== main_list [j][k+1] and [j,k] not in ban_list and [j,k+1] not in ban_list:
+                    main_list[j][k] += main_list[j][k+1]
+                    main_list[j][k+1] =0 
+                    ban_list.append([j,k])
+                    
 def zero(main_list):
     for i in range(4): 
         for j in range(4):
@@ -101,8 +121,4 @@ def plus_two(main_list):
                 
                 
             
-        
-
-
-
 main()
